@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UrbanSense: Real-Time IoT Sensor Fusion</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-city"></i>
+                    <h1>UrbanSense</h1>
+                    <span class="subtitle">Real-Time IoT Sensor Fusion with Graph Neural Networks</span>
+                </div>
+                <div class="status-indicators">
+                    <div class="status-item">
+                        <span class="status-label">System Status</span>
+                        <span class="status-value" id="systemStatus">
+                            <i class="fas fa-circle status-active"></i> ACTIVE
+                        </span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">Sensors</span>
+                        <span class="status-value" id="sensorCount">0</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">Alerts</span>
+                        <span class="status-value" id="alertCount">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <h1>Real-Time IoT Sensor Fusion with Graph Neural Networks</h1>
+            <p class="hero-subtitle">Watch AI understand city-wide sensor data in real-time</p>
+        </div>
+    </section>
+
+    <!-- Main Dashboard -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Control Panel -->
+            <section class="control-panel">
+                <h2><i class="fas fa-sliders-h"></i> Simulation Controls</h2>
+                <div class="controls">
+                    <button id="startBtn" class="btn btn-start">
+                        <i class="fas fa-play"></i> Start Simulation
+                    </button>
+                    <button id="stopBtn" class="btn btn-stop" disabled>
+                        <i class="fas fa-stop"></i> Stop Simulation
+                    </button>
+                    <div class="control-group">
+                        <label for="sensorSlider">Sensors: <span id="sensorValue">50</span></label>
+                        <input type="range" id="sensorSlider" min="10" max="200" value="50">
+                    </div>
+                    <div class="control-group">
+                        <label for="speedSlider">Speed: <span id="speedValue">1x</span></label>
+                        <input type="range" id="speedSlider" min="1" max="10" value="1">
+                    </div>
+                    <div class="control-group">
+                        <label for="notificationsToggle">
+                            <input type="checkbox" id="notificationsToggle" checked>
+                            Event Notifications
+                        </label>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Event Notification Display -->
+            <div id="eventNotification" class="event-notification hidden">
+                <div class="notification-content">
+                    <div class="notification-icon"></div>
+                    <div class="notification-text">
+                        <div class="notification-title"></div>
+                        <div class="notification-message"></div>
+                        <div class="notification-recommendation"></div>
+                    </div>
+                    <button class="notification-close">&times;</button>
+                </div>
+            </div>
+
+            <!-- City Map Visualization -->
+            <section class="city-map-section">
+                <h2>Live City Sensor Map</h2>
+                <div class="city-map-container">
+                    <div id="cityMap" class="city-map"></div>
+                    <div class="map-legend">
+                        <div class="legend-row">
+                            <div class="legend-item">
+                                <div class="legend-dot temperature"></div>
+                                <span>Temperature Sensors</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-dot light"></div>
+                                <span>Light Sensors</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-dot traffic"></div>
+                                <span>Traffic Sensors</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Visualization Grid -->
+            <div class="visualization-grid">
+                <!-- Sensor Network Graph -->
+                <section class="viz-panel">
+                    <h3>Dynamic Sensor Network</h3>
+                    <div class="graph-container">
+                        <div id="networkGraph"></div>
+                        <div class="graph-legend">
+                            <div class="legend-item">
+                                <span class="legend-color" style="background: #ff6b6b;"></span>
+                                <span>Temperature</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color" style="background: #4ecdc4;"></span>
+                                <span>Humidity</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color" style="background: #45b7d1;"></span>
+                                <span>Audio</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color" style="background: #96ceb4;"></span>
+                                <span>Visual</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color" style="background: #feca57;"></span>
+                                <span>Air Quality</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color" style="background: #ff9ff3;"></span>
+                                <span>Accelerometer</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Real-Time Data Streams -->
+                <section class="viz-panel">
+                    <h3>Live Sensor Data</h3>
+                    <div class="chart-container">
+                        <canvas id="sensorChart"></canvas>
+                    </div>
+                </section>
+
+                <!-- AI Applications -->
+                <section class="viz-panel applications-panel">
+                    <h3>AI Applications</h3>
+
+                    <!-- Anomaly Detection -->
+                    <div class="app-section">
+                        <h4><i class="fas fa-exclamation-triangle"></i> Anomaly Detection</h4>
+                        <div id="anomalyList" class="alert-list">
+                            <div class="no-alerts">No anomalies detected</div>
+                        </div>
+                    </div>
+
+                    <!-- Traffic Optimization -->
+                    <div class="app-section">
+                        <h4><i class="fas fa-traffic-light"></i> Traffic Optimization</h4>
+                        <div id="trafficList" class="alert-list">
+                            <div class="no-alerts">Traffic flowing normally</div>
+                        </div>
+                    </div>
+
+                    <!-- Emergency Response -->
+                    <div class="app-section">
+                        <h4><i class="fas fa-ambulance"></i> Emergency Response</h4>
+                        <div id="emergencyList" class="alert-list">
+                            <div class="no-alerts">No emergencies detected</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- System Performance -->
+                <section class="viz-panel">
+                    <h3>System Performance</h3>
+                    <div class="performance-metrics">
+                        <div class="metric-card">
+                            <div class="metric-value" id="latencyMetric">0ms</div>
+                            <div class="metric-label">Processing Latency</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value" id="throughputMetric">0</div>
+                            <div class="metric-label">Readings/Sec</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value" id="accuracyMetric">0%</div>
+                            <div class="metric-label">Fusion Accuracy</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value" id="edgesMetric">0</div>
+                            <div class="metric-label">Graph Edges</div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- What's Happening -->
+            <section class="explanation-section">
+                <h2>What's Actually Happening Here</h2>
+
+                <div class="simple-explanation">
+                    <div class="explanation-block">
+                        <h3>The Problem We're Solving</h3>
+                        <p>Cities have thousands of sensors everywhere - measuring temperature, air quality, noise, traffic, and more. But they all work separately, like having a bunch of people in different rooms who never talk to each other. We can do better.</p>
+                    </div>
+
+                    <div class="explanation-block">
+                        <h3>Our Solution: Connecting the Dots</h3>
+                        <p>We use AI that thinks like a social network - it understands that a temperature sensor near a traffic light should "talk" to nearby noise sensors. When traffic gets heavy, temperature goes up AND noise increases. Our AI learns these patterns.</p>
+                    </div>
+
+                    <div class="explanation-block">
+                        <h3>The Technology: Graph Neural Networks</h3>
+                        <p>Think of it like Facebook for sensors. Each sensor is a "friend" in the network, and the AI learns who should be connected to whom. It processes all their data together, finding patterns no human could spot across thousands of sensors.</p>
+                    </div>
+
+                    <div class="explanation-block">
+                        <h3>Real Results</h3>
+                        <p>This isn't just cool tech - it actually helps cities run better. The system can detect fires before 911 calls, optimize traffic lights in real-time, and spot pollution sources instantly. It's like giving the city a brain that thinks really, really fast.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>UrbanSense: Advancing multimodal AI from medical research to real-world smart city applications</p>
+            <p>Built with ❤️ for sustainable urban development</p>
+        </div>
+    </footer>
+
+    <script src="simulation.js"></script>
+</body>
+</html>
