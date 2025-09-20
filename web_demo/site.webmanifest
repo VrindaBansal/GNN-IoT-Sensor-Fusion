@@ -1,0 +1,27 @@
+{
+    "name": "UrbanSense: IoT Sensor Fusion",
+    "short_name": "UrbanSense",
+    "description": "Real-time IoT sensor fusion with Graph Neural Networks for smart city applications",
+    "icons": [
+        {
+            "src": "favicon.svg",
+            "sizes": "any",
+            "type": "image/svg+xml",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "favicon.ico",
+            "sizes": "16x16 32x32",
+            "type": "image/x-icon"
+        }
+    ],
+    "theme_color": "#2563eb",
+    "background_color": "#ffffff",
+    "display": "standalone",
+    "orientation": "any",
+    "start_url": "./",
+    "scope": "./",
+    "categories": ["productivity", "utilities"],
+    "lang": "en",
+    "dir": "ltr"
+}

@@ -927,8 +927,16 @@ class UrbanSenseSimulation {
             reading.style.transition = 'opacity 0.3s';
             sensor.appendChild(reading);
 
+            // Add both mouse and touch events for better mobile support
             sensor.addEventListener('mouseenter', () => reading.style.opacity = '1');
             sensor.addEventListener('mouseleave', () => reading.style.opacity = '0');
+            sensor.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                reading.style.opacity = '1';
+            });
+            sensor.addEventListener('touchend', () => {
+                setTimeout(() => reading.style.opacity = '0', 2000); // Keep visible for 2s on mobile
+            });
 
             const sensorData = {
                 element: sensor,
