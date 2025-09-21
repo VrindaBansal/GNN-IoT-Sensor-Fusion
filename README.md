@@ -2,12 +2,12 @@
 
 A comprehensive smart city platform that uses Graph Neural Networks to process real-time IoT sensor data, detect events, and provide intelligent recommendations for urban management.
 
-🌟 **[Live Demo](https://vrindabansal.github.io/urbansense/web_demo/)** - Try the interactive demo!
+🌟 **[Live Demo](https://vrindabansal.github.io/urbansense/)** - Try the interactive demo!
 
 ## 🚀 Quick Start
 
 ### Option 1: Online Demo
-Visit the [live demo](https://vrindabansal.github.io/urbansense/web_demo/) to see UrbanSense in action immediately.
+Visit the [live demo](https://vrindabansal.github.io/urbansense/) to see UrbanSense in action immediately.
 
 ### Option 2: Local Setup
 ```bash
@@ -168,7 +168,7 @@ urbansense/
 
 ### GitHub Pages (Automatic)
 The project automatically deploys to GitHub Pages on every push to main branch:
-- **URL**: https://vrindabansal.github.io/urbansense/web_demo/
+- **URL**: https://vrindabansal.github.io/urbansense/
 - **Status**: [![Deploy](https://github.com/VrindaBansal/urbansense/actions/workflows/deploy.yml/badge.svg)](https://github.com/VrindaBansal/urbansense/actions/workflows/deploy.yml)
 
 ### Manual Deployment
@@ -236,4 +236,4 @@ Built with inspiration from multimodal AI research in medical applications, adap
 
 ---
 
-**Ready to transform your city with AI? [Try the demo now!](https://vrindabansal.github.io/urbansense/web_demo/)**
+**Ready to transform your city with AI? [Try the demo now!](https://vrindabansal.github.io/urbansense/)**
